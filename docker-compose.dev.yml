@@ -1,0 +1,38 @@
+version: '3.7'
+networks:
+  payment-api:
+    external: true
+services:
+  app:
+    container_name: ${APP_NAME}-app
+    image: node:${NODE_VERSION}-alpine
+    working_dir: /usr/src/app
+    restart: always
+    command: yarn start:debug
+    ports:
+      - ${PORT}:3333
+      - '9229:9229'
+    volumes:
+      - ./:/usr/src/app
+    environment:
+      - PORT=3333
+    depends_on:
+      - mongo
+    networks:
+      - payment-api
+  mongo:
+    container_name: ${APP_NAME}-mongo
+    image: mongo
+    restart: always
+    ports:
+      - ${DB_PORT}:27017
+    volumes:
+      - ./.docker/db/mongodb:/data/db
+      - ./.docker/db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+      MONGO_INITDB_DATABASE: ${DB_DATABASE}
+
+    networks:
+      - payment-api
