@@ -5,5 +5,7 @@ export interface IUser extends Document {
   name: string
   surName: string
   cpf: string
-  account_id: [Schema.Types.ObjectId]
+  account_id: string[]
+  createdAt: Date
+  updatedAt: Date
 }

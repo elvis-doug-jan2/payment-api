@@ -18,40 +18,37 @@ export const UserSchema = new Schema(
     },
     cpf: {
       type: String,
-      default: null,
+      required: true,
     },
     accountsId: {
       type: [Schema.Types.ObjectId],
+      required: false,
       default: null,
     },
   },
   { timestamps: true },
 )
 
-UserSchema.post<IUser>('findOne', function (user) {
-  if (user) user.email = decrypt(user.email)
-})
+// UserSchema.post<IUser>('findOne', function (user) {
+//   if (user) user.email = decrypt(user.email)
+// })
 
-UserSchema.post<IUser>('findById', function (user) {
-  if (user) user.email = decrypt(user.email)
-})
+// UserSchema.post<IUser>('findById', function (user) {
+//   if (user) user.email = decrypt(user.email)
+// })
 
 UserSchema.pre<IUser>('save', function (next) {
-  if (!this.isModified('password') || !this.isModified('email')) return next()
-
-  // if (this.isModified('password')) this.password = encrypt(this.password)
-  if (this.isModified('email')) this.email = encrypt(this.email)
-
+  this.cpf = this.cpf.replace(/[-.]/g, '')
   next()
 })
 
-UserSchema.pre('updateOne', function (next) {
-  let user = this.getUpdate()
+// UserSchema.pre('updateOne', function (next) {
+//   let user = this.getUpdate()
 
-  if (user.password) user.password = encrypt(user.password)
-  if (user.email) user.email = encrypt(user.email)
+//   if (user.password) user.password = encrypt(user.password)
+//   if (user.email) user.email = encrypt(user.email)
 
-  if (user['$set'].password) user['$set'].password = encrypt(user['$set'].password)
+//   if (user['$set'].password) user['$set'].password = encrypt(user['$set'].password)
 
-  next()
-})
+//   next()
+// })

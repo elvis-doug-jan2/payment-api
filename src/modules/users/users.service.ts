@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common'
 import { UserRepository } from './users.repository'
+import { UsersDTO } from './users.dto'
+import { IUser } from 'src/shared/interfaces/user.interface'
 
 @Injectable()
 export class UsersService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async getAllUsers(): Promise<any> {
+  async getAllUsers(): Promise<IUser[]> {
     return this.userRepository.getAll()
   }
 
-  getHello(): string {
-    return 'Hello World!'
+  async createNewUser(userData: UsersDTO): Promise<IUser> {
+    return this.userRepository.createUser(userData)
   }
 }
