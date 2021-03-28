@@ -8,8 +8,8 @@ async function bootstrap() {
   app.setGlobalPrefix(config.prefix)
 
   const options = new DocumentBuilder()
-    .setTitle('Marvel Herores API')
-    .setDescription('Marvel Heroes documentation')
+    .setTitle('API Payment')
+    .setDescription('API Payment documentation')
     .setVersion('1.0')
     .build()
 
