@@ -1,9 +1,9 @@
 import { Connection } from 'mongoose'
-import { UserSchema } from './schemas/user.schema'
-import { AccountSchema } from './schemas/account.schema'
-import { FavoredSchema } from './schemas/favored.schema'
+import { AccountSchema } from 'src/modules/favored/schemas/account.schema'
+import { FavoredSchema } from 'src/modules/favored/schemas/favored.schema'
+import { UserSchema } from 'src/modules/favored/schemas/user.schema'
 
-export const FavoredProvider = [
+export const PopulateDBProvider = [
   {
     provide: 'USER',
     useFactory: (connection: Connection) => connection.model('users', UserSchema),

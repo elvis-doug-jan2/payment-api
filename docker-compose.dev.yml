@@ -1,6 +1,6 @@
 version: '3.7'
 networks:
-  payment-api:
+  payment_api:
     external: true
 services:
   app:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - mongo
     networks:
-      - payment-api
+      - payment_api
   mongo:
     container_name: ${APP_NAME}-mongo
     image: mongo
@@ -35,4 +35,4 @@ services:
       MONGO_INITDB_DATABASE: ${DB_DATABASE}
 
     networks:
-      - payment-api
+      - payment_api
