@@ -1,7 +1,7 @@
 import { Connection } from 'mongoose'
-import { AccountSchema } from 'src/modules/favored/schemas/account.schema'
-import { FavoredSchema } from 'src/modules/favored/schemas/favored.schema'
-import { UserSchema } from 'src/modules/favored/schemas/user.schema'
+import { AccountSchema } from 'src/shared/schemas/account.schema'
+import { FavoredSchema } from 'src/shared/schemas/favored.schema'
+import { UserSchema } from 'src/shared/schemas/user.schema'
 
 export const PopulateDBProvider = [
   {

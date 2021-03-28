@@ -1,7 +1,7 @@
 import { Connection } from 'mongoose'
-import { UserSchema } from './schemas/user.schema'
-import { AccountSchema } from './schemas/account.schema'
-import { FavoredSchema } from './schemas/favored.schema'
+import { UserSchema } from 'src/shared/schemas/user.schema'
+import { AccountSchema } from 'src/shared/schemas/account.schema'
+import { FavoredSchema } from 'src/shared/schemas/favored.schema'
 
 export const FavoredProvider = [
   {

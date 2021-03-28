@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 import { Model } from 'mongoose'
-import { IUser } from 'src/modules/favored/interfaces/user.interface'
+import { IUser } from 'src/shared/interfaces/user.interface'
 
 export class PopulateDBRepository {
   constructor(

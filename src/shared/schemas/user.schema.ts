@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose'
-import { encrypt, decrypt } from '../../../utils/criptPass.util'
+import { encrypt, decrypt } from '../utils/criptPass.util'
 import { IUser } from '../interfaces/user.interface'
 
 export const UserSchema = new Schema(
