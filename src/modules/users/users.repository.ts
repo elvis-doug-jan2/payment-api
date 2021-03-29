@@ -10,12 +10,10 @@ export class UserRepository {
   ) {}
 
   async getAll(): Promise<IUser[]> {
-    return this.userModel.find().lean()
+    return this.userModel.find().sort({ createdAt: -1 }).lean()
   }
 
   async createUser(userData: UsersDTO): Promise<IUser> {
-    userData.cpf = userData.cpf.replace(/-/g, '')
-
     return this.userModel.create(userData)
   }
 }

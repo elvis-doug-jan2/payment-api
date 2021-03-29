@@ -12,7 +12,7 @@ export class PopulateService {
     const databaseIsEmpty = await this.checkIfDBIsEmpty()
 
     if (databaseIsEmpty) await this.populateDabase()
-    else console.log('DATABASE HAVE DATA, DO NOT NEED POPULATE.')
+    else console.log(`----> DATABASE HAVE DATA, DON'T NEED POPULATE. <----`.green)
   }
 
   private async checkIfDBIsEmpty(): Promise<boolean> {
