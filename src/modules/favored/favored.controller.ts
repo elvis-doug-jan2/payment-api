@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common'
+import { CheckSpecialCharsCPFPipe } from 'src/pipe/removeSpecialCpfCaracters.pipe'
 import { IFavored } from 'src/shared/interfaces/favored.interface'
 import { FavoredDTO } from './favored.dto'
 import { FavoredService } from './favored.service'
@@ -13,7 +14,7 @@ export class FavoredController {
   }
 
   @Post()
-  async createNewFavoredRegistry(@Body() favoredData: FavoredDTO): Promise<IFavored> {
+  async createNewFavoredRegistry(@Body(CheckSpecialCharsCPFPipe) favoredData: FavoredDTO): Promise<IFavored> {
     return this.favoredService.createFavoredRegistry(favoredData)
   }
 }

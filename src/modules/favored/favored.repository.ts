@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 import { Model } from 'mongoose'
-import { IFavored } from 'src/shared/interfaces/favored.interface'
+import { IFavored, IFavoredData } from 'src/shared/interfaces/favored.interface'
 import { FavoredDTO } from './favored.dto'
 
 export class FavoredRepository {
@@ -13,7 +13,7 @@ export class FavoredRepository {
     return this.favoredModel.find().populate('userId').populate('accountId').lean()
   }
 
-  async createFavoredRegistry(favoredData: FavoredDTO): Promise<IFavored> {
+  async createFavoredRegistry(favoredData: IFavoredData): Promise<IFavored> {
     return this.favoredModel.create(favoredData)
   }
 }

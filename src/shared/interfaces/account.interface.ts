@@ -7,7 +7,6 @@ export interface IAccount extends Document {
   accountType: string
   accountNumber: string
   accountDigit: string
-  userId: string
   createdAt: Date
   updatedAt: Date
 }

@@ -14,4 +14,12 @@ export class UsersService {
   async createNewUser(userData: UsersDTO): Promise<IUser> {
     return this.userRepository.createUser(userData)
   }
+
+  async getUserDataByCpf(cpf: string): Promise<IUser> {
+    return this.userRepository.getUserDataByCpf(cpf)
+  }
+
+  async addNewAccountIdOnUser(cpf: string, accountId: string): Promise<any> {
+    return this.userRepository.updateUserByCpf(cpf, { $push: { accountsId: accountId } })
+  }
 }

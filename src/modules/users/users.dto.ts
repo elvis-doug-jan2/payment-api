@@ -7,10 +7,10 @@ export class UsersDTO {
   @IsString()
   name: string
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  surName: string
+  // @ApiProperty()
+  // @IsNotEmpty()
+  // @IsString()
+  // surName: string
 
   @ApiProperty()
   @IsNotEmpty()

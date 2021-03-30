@@ -16,4 +16,12 @@ export class UserRepository {
   async createUser(userData: UsersDTO): Promise<IUser> {
     return this.userModel.create(userData)
   }
+
+  async getUserDataByCpf(cpf: string): Promise<IUser> {
+    return this.userModel.findOne({ cpf }).lean()
+  }
+
+  async updateUserByCpf(cpf: string, newData: object): Promise<any> {
+    return this.userModel.findOneAndUpdate({ cpf }, newData, { new: true }).lean()
+  }
 }
