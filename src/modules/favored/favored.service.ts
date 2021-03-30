@@ -28,14 +28,6 @@ export class FavoredService {
       await this.usersService.addNewAccountIdOnUser(favoredData.userData.cpf, accountData._id)
     }
 
-    console.log('::::::::::::', accountData, userData)
-
-    console.log({
-      accountId: accountData._id,
-      status: favoredData.status,
-      userId: userData._id,
-    })
-
     return this.favoredRepository.createFavoredRegistry({
       accountId: accountData._id,
       status: favoredData.status,
