@@ -31,9 +31,4 @@ export class AccountDTO {
   @IsNotEmpty()
   @IsString()
   accountDigit: string
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  userId: string
 }

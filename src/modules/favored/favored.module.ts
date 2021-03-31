@@ -3,7 +3,7 @@ import { FavoredController } from './favored.controller'
 import { FavoredService } from './favored.service'
 import { DatabaseModule } from 'src/config/database/database.module'
 import { FavoredRepository } from './favored.repository'
-import { UsersModule } from '../users/users.module'
+import { UsersModule } from '../client/client.module'
 import { AccountsModule } from '../account/account.module'
 
 @Module({

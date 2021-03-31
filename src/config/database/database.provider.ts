@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 import config from '../envs.config'
 import { Connection } from 'mongoose'
-import { UserSchema } from 'src/shared/schemas/user.schema'
+import { ClientSchema } from 'src/shared/schemas/client.schema'
 import { AccountSchema } from 'src/shared/schemas/account.schema'
 import { FavoredSchema } from 'src/shared/schemas/favored.schema'
 
@@ -13,14 +13,15 @@ export const DatabaseConnectionProvider = {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false,
     })
   },
 }
 
 export const DatabaseSchemasProvider = [
   {
-    provide: 'USER',
-    useFactory: (connection: Connection) => connection.model('users', UserSchema),
+    provide: 'CLIENT',
+    useFactory: (connection: Connection) => connection.model('clients', ClientSchema),
     inject: ['DATABASE_CONNECTION'],
   },
   {

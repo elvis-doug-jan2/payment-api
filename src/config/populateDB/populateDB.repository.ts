@@ -1,19 +1,19 @@
 import { Inject } from '@nestjs/common'
 import { Model } from 'mongoose'
-import { IUser } from 'src/shared/interfaces/user.interface'
+import { IClient } from 'src/shared/interfaces/client.interface'
 
 export class PopulateDBRepository {
   constructor(
-    @Inject('USER')
-    private readonly userModel: Model<IUser>,
+    @Inject('CLIENT')
+    private readonly clientModel: Model<IClient>,
     @Inject('ACCOUNT')
-    private readonly accountModel: Model<IUser>,
+    private readonly accountModel: Model<IClient>,
     @Inject('FAVORED')
-    private readonly favoredModel: Model<IUser>,
+    private readonly favoredModel: Model<IClient>,
   ) {}
 
   async checkTotalDocsForUsers(): Promise<number> {
-    return this.userModel.countDocuments({})
+    return this.clientModel.countDocuments({})
   }
 
   async checkTotalDocsForAccounts(): Promise<number> {

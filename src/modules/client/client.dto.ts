@@ -1,16 +1,11 @@
 import { IsNotEmpty, IsString, IsOptional, IsEmail, IsArray } from 'class-validator'
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
+import { ApiProperty } from '@nestjs/swagger'
 
-export class UsersDTO {
+export class ClientDTO {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   name: string
-
-  // @ApiProperty()
-  // @IsNotEmpty()
-  // @IsString()
-  // surName: string
 
   @ApiProperty()
   @IsNotEmpty()
@@ -20,10 +15,10 @@ export class UsersDTO {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  cpf: string
+  document: string
 
   @ApiProperty()
   @IsOptional()
   @IsArray()
-  accountsId: string[]
+  accountsId?: string[]
 }

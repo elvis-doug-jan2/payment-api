@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose'
 
-export const UserSchema = new Schema(
+export const ClientSchema = new Schema(
   {
     email: {
       type: String,
@@ -10,7 +10,7 @@ export const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    cpf: {
+    document: {
       type: String,
       required: true,
     },

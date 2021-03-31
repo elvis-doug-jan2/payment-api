@@ -2,10 +2,10 @@ import { Schema } from 'mongoose'
 
 export const FavoredSchema = new Schema(
   {
-    userId: {
+    clientId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: 'users',
+      ref: 'clients',
     },
     accountId: {
       type: Schema.Types.ObjectId,

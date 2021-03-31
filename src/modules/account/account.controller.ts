@@ -13,7 +13,7 @@ export class AccountController {
   }
 
   @Post()
-  async createNewAccount(@Body() userData: AccountDTO): Promise<IAccount> {
-    return this.accountService.createNewAccount(userData)
+  async createNewAccount(@Body() clientData: AccountDTO): Promise<IAccount> {
+    return this.accountService.createNewAccount(clientData)
   }
 }

@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common'
 import { IFavored } from 'src/shared/interfaces/favored.interface'
 import { FavoredDTO } from './favored.dto'
 import { FavoredRepository } from './favored.repository'
-import { UsersService } from '../../modules/users/users.service'
+import { ClientsService } from '../client/client.service'
 import { AccountService } from '../account/account.service'
 
 @Injectable()
 export class FavoredService {
   constructor(
     private readonly favoredRepository: FavoredRepository,
-    private readonly usersService: UsersService,
+    private readonly clientsService: ClientsService,
     private readonly accountService: AccountService,
   ) {}
 
@@ -20,18 +20,21 @@ export class FavoredService {
   async createFavoredRegistry(favoredData: FavoredDTO): Promise<IFavored> {
     const accountData = await this.accountService.createNewAccount(favoredData.accountData)
 
-    let userData = await this.usersService.getUserDataByCpf(favoredData.userData.cpf)
+    let clientData = await this.clientsService.getClientDataByDocument(favoredData.clientData.document)
 
-    if (!userData) {
-      userData = await this.usersService.createNewUser({ ...favoredData.userData, accountsId: [accountData._id] })
+    if (!clientData) {
+      clientData = await this.clientsService.createNewClient({
+        ...favoredData.clientData,
+        accountsId: [accountData._id],
+      })
     } else {
-      await this.usersService.addNewAccountIdOnUser(favoredData.userData.cpf, accountData._id)
+      await this.clientsService.addNewAccountIdOnUser(favoredData.clientData.document, accountData._id)
     }
 
     return this.favoredRepository.createFavoredRegistry({
       accountId: accountData._id,
       status: favoredData.status,
-      userId: userData._id,
+      clientId: clientData._id,
     })
   }
 }

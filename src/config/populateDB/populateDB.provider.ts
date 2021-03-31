@@ -1,12 +1,12 @@
 import { Connection } from 'mongoose'
 import { AccountSchema } from 'src/shared/schemas/account.schema'
 import { FavoredSchema } from 'src/shared/schemas/favored.schema'
-import { UserSchema } from 'src/shared/schemas/user.schema'
+import { ClientSchema } from 'src/shared/schemas/client.schema'
 
 export const PopulateDBProvider = [
   {
-    provide: 'USER',
-    useFactory: (connection: Connection) => connection.model('users', UserSchema),
+    provide: 'CLIENT',
+    useFactory: (connection: Connection) => connection.model('users', ClientSchema),
     inject: ['DATABASE_CONNECTION'],
   },
   {

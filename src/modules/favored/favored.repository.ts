@@ -10,7 +10,7 @@ export class FavoredRepository {
   ) {}
 
   async getAllFavoreds(): Promise<IFavored[]> {
-    return this.favoredModel.find().populate('userId').populate('accountId').lean()
+    return this.favoredModel.find().populate('clientId').populate('accountId').lean()
   }
 
   async createFavoredRegistry(favoredData: IFavoredData): Promise<IFavored> {

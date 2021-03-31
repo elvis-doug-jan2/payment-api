@@ -1,7 +1,7 @@
 import { Document } from 'mongoose'
 
 export interface IFavored extends Document {
-  userId: string
+  clientId: string
   accountId: string
   status: string
   createdAt: Date
@@ -9,7 +9,7 @@ export interface IFavored extends Document {
 }
 
 export interface IFavoredData {
-  userId: string
+  clientId: string
   accountId: string
   status: string
 }

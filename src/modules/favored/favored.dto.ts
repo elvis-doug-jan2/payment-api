@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator'
-import { UsersDTO } from '../users/users.dto'
+import { ClientDTO } from '../client/client.dto'
 import { AccountDTO } from '../account/account.dto'
 import { ApiProperty } from '@nestjs/swagger'
 
@@ -10,7 +10,7 @@ export class FavoredDTO {
   status: string
 
   @ApiProperty()
-  userData: UsersDTO
+  clientData: ClientDTO
 
   @ApiProperty()
   accountData: AccountDTO

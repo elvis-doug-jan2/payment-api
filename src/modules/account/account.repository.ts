@@ -10,7 +10,7 @@ export class AccountRepository {
   ) {}
 
   async getAllAccounts(): Promise<IAccount[]> {
-    return this.accountModel.find().populate('userId').lean()
+    return this.accountModel.find().populate('clientId').lean()
   }
 
   async createUserAccount(accountData: AccountDTO): Promise<IAccount> {
