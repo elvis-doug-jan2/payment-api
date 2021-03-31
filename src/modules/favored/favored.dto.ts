@@ -15,3 +15,11 @@ export class FavoredDTO {
   @ApiProperty()
   accountData: AccountDTO
 }
+
+export class ResponseFavoredDTO {
+  favoreds: FavoredDTO[]
+  page: number
+  perPage: number
+  totalItens: number
+  totalPages: number
+}

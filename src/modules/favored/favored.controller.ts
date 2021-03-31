@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post, Query } from '@nestjs/common'
+import { ParseIntPipe } from 'src/pipe/parseIntParams.pipe'
 import { CheckSpecialCharsDocumentPipe } from 'src/pipe/removeSpecialCpfCaracters.pipe'
 import { IFavored } from 'src/shared/interfaces/favored.interface'
-import { FavoredDTO } from './favored.dto'
+import { FavoredDTO, ResponseFavoredDTO } from './favored.dto'
 import { FavoredService } from './favored.service'
 
 @Controller('favoreds')
@@ -9,8 +10,11 @@ export class FavoredController {
   constructor(private readonly favoredService: FavoredService) {}
 
   @Get()
-  async getAllFavoreds(): Promise<IFavored[]> {
-    return this.favoredService.getAllFavoreds()
+  async getAllFavoreds(
+    @Query('page', new ParseIntPipe()) page: number,
+    @Query('perPage', new ParseIntPipe()) perPage: number,
+  ): Promise<ResponseFavoredDTO> {
+    return this.favoredService.getAllFavoreds(page, perPage)
   }
 
   @Post()

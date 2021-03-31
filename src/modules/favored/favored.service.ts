@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { IFavored } from 'src/shared/interfaces/favored.interface'
-import { FavoredDTO } from './favored.dto'
+import { FavoredDTO, ResponseFavoredDTO } from './favored.dto'
 import { FavoredRepository } from './favored.repository'
 import { ClientsService } from '../client/client.service'
 import { AccountService } from '../account/account.service'
@@ -13,8 +13,8 @@ export class FavoredService {
     private readonly accountService: AccountService,
   ) {}
 
-  async getAllFavoreds(): Promise<IFavored[]> {
-    return this.favoredRepository.getAllFavoreds()
+  async getAllFavoreds(page: number, perPage: number): Promise<ResponseFavoredDTO> {
+    return this.favoredRepository.getAllFavoreds(page, perPage)
   }
 
   async createFavoredRegistry(favoredData: FavoredDTO): Promise<IFavored> {
