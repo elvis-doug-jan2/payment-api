@@ -1,10 +1,15 @@
 import { Injectable } from '@nestjs/common'
 import { PopulateDBRepository } from './populateDB.repository'
+import { favoredMockList } from '../../../insertFavored'
 import * as colors from 'colors'
+import { FavoredService } from 'src/modules/favored/favored.service'
 
 @Injectable()
 export class PopulateService {
-  constructor(private readonly populateDBRepository: PopulateDBRepository) {
+  constructor(
+    private readonly populateDBRepository: PopulateDBRepository,
+    private readonly favoredService: FavoredService,
+  ) {
     colors.enable()
   }
 
@@ -12,7 +17,6 @@ export class PopulateService {
     const databaseIsEmpty = await this.checkIfDBIsEmpty()
 
     if (databaseIsEmpty) await this.populateDabase()
-    else console.log('DATABASE HAVE DATA, DO NOT NEED POPULATE.')
   }
 
   private async checkIfDBIsEmpty(): Promise<boolean> {
@@ -25,11 +29,15 @@ export class PopulateService {
     return totalDocs.every((docs) => docs === 0)
   }
 
-  private async populateDabase(): Promise<boolean> {
+  private async populateDabase(): Promise<void> {
     console.log('-------------------------------------------------------------'.yellow)
-    console.log('--->    POPULANDO BANCO DE DADOS COM VALORES INICIAIS    <---'.cyan)
-    console.log('-------------------------------------------------------------'.yellow)
+    console.log('--->      POPULATING DATABASE WITH INITIAL VALUES...     <---'.cyan)
 
-    return new Promise((resolve, reject) => resolve(true))
+    for (const favoredMock of favoredMockList) {
+      await this.favoredService.createFavoredRegistry(favoredMock)
+    }
+
+    console.log('--->                 POPULATED DATABASE!!!               <---'.cyan)
+    console.log('-------------------------------------------------------------'.yellow)
   }
 }

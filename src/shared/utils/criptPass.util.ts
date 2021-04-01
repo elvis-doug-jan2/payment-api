@@ -1,5 +1,5 @@
 import * as crypto from 'crypto'
-import config from '../config/envs.config'
+import config from '../../config/envs.config'
 
 export function encrypt(password: string): string {
   const iv = hexStringToByte(config.encryption.iv.toString())

@@ -3,9 +3,11 @@ import { DatabaseModule } from './config/database/database.module'
 import { PopulateDBModule } from './config/populateDB/populateDB.module'
 import { FavoredModule } from './modules/favored/favored.module'
 import { PopulateService } from './config/populateDB/populateDB.service'
+import { UsersModule } from './modules/client/client.module'
+import { AccountsModule } from './modules/account/account.module'
 
 @Module({
-  imports: [FavoredModule, DatabaseModule, PopulateDBModule],
+  imports: [DatabaseModule, PopulateDBModule, FavoredModule, UsersModule, AccountsModule],
 })
 export class AppModule {
   constructor(private readonly pDBService: PopulateService) {

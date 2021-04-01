@@ -2,11 +2,11 @@ import { Schema } from 'mongoose'
 
 export const AccountSchema = new Schema(
   {
-    bank: {
+    bankName: {
       type: String,
       required: true,
     },
-    agency: {
+    agencyNumber: {
       type: String,
       required: true,
     },
@@ -18,12 +18,12 @@ export const AccountSchema = new Schema(
       type: String,
       required: true,
     },
-    accountDigit: {
+    accountNumber: {
       type: String,
       required: true,
     },
-    userId: {
-      type: Schema.Types.ObjectId,
+    accountDigit: {
+      type: String,
       required: true,
     },
   },
