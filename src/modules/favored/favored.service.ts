@@ -32,9 +32,9 @@ export class FavoredService {
     }
 
     return this.favoredRepository.createFavoredRegistry({
-      accountId: accountData._id,
+      accountData: accountData._id,
       status: favoredData.status,
-      clientId: clientData._id,
+      clientData: clientData._id,
     })
   }
 }
