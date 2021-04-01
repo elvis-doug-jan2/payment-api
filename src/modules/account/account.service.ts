@@ -11,6 +11,10 @@ export class AccountService {
     return this.accountRepository.getAllAccounts()
   }
 
+  async getAccountsIdByQuery(query: object): Promise<{ _id: string }[]> {
+    return this.accountRepository.getAccountsIdByQuery(query)
+  }
+
   async createNewAccount(accountData: AccountDTO): Promise<IAccount> {
     return this.accountRepository.createUserAccount(accountData)
   }

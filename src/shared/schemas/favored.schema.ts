@@ -2,12 +2,12 @@ import { Schema } from 'mongoose'
 
 export const FavoredSchema = new Schema(
   {
-    clientId: {
+    clientData: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'clients',
     },
-    accountId: {
+    accountData: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'accounts',

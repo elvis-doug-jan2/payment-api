@@ -16,4 +16,8 @@ export class AccountRepository {
   async createUserAccount(accountData: AccountDTO): Promise<IAccount> {
     return this.accountModel.create(accountData)
   }
+
+  async getAccountsIdByQuery(query: object): Promise<{ _id: string }[]> {
+    return this.accountModel.find(query).select('_id').lean()
+  }
 }

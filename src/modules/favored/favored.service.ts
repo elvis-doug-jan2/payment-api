@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { IFavored } from 'src/shared/interfaces/favored.interface'
-import { FavoredDTO, ResponseFavoredDTO } from './favored.dto'
+import { FavoredDTO, QueryConsultFavoredDTO, ResponseFavoredDTO } from './favored.dto'
 import { FavoredRepository } from './favored.repository'
 import { ClientsService } from '../client/client.service'
 import { AccountService } from '../account/account.service'
@@ -13,8 +13,45 @@ export class FavoredService {
     private readonly accountService: AccountService,
   ) {}
 
-  async getAllFavoreds(page: number, perPage: number): Promise<ResponseFavoredDTO> {
-    return this.favoredRepository.getAllFavoreds(page, perPage)
+  async getAllFavoreds(
+    page: number,
+    perPage: number,
+    queryObject: QueryConsultFavoredDTO,
+  ): Promise<ResponseFavoredDTO> {
+    const query = JSON.parse(JSON.stringify(queryObject))
+
+    const userQuery = {}
+    const accountQuery = {}
+
+    const isUserQuery = (field: string, value: string): void => {
+      userQuery[field] = value
+    }
+
+    const isAccountQuery = (field: string, value: string): void => {
+      accountQuery[field] = value
+    }
+
+    const checkWhatQueryIs = {
+      document: isUserQuery,
+      agencyNumber: isAccountQuery,
+      accountType: isAccountQuery,
+      name: isUserQuery,
+    }
+
+    Object.getOwnPropertyNames(query).forEach((propertie) => {
+      checkWhatQueryIs[propertie](propertie, query[propertie])
+    })
+
+    const accountsId = await this.accountService
+      .getAccountsIdByQuery(accountQuery)
+      .then((list) => list.map((item) => ({ accountData: `ObjectId(${item._id})` })))
+    const clientsId = await this.clientsService
+      .getClientsIdByQuery(userQuery)
+      .then((list) => list.map((item) => ({ clientData: `ObjectId(${item._id})` })))
+
+    console.log(JSON.stringify(accountsId), JSON.stringify(clientsId))
+
+    return this.favoredRepository.getAllFavoreds(page, perPage, query)
   }
 
   async createFavoredRegistry(favoredData: FavoredDTO): Promise<IFavored> {

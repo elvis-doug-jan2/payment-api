@@ -23,3 +23,10 @@ export class ResponseFavoredDTO {
   totalItens: number
   totalPages: number
 }
+
+export class QueryConsultFavoredDTO {
+  document: string
+  agencyNumber: string
+  accountType: string
+  name: string
+}

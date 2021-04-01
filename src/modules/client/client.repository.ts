@@ -17,6 +17,10 @@ export class ClientRepository {
     return this.clientModel.create(clientData)
   }
 
+  async getClientsIdByQuery(query: object): Promise<{ _id: string }[]> {
+    return this.clientModel.find(query).select('_id').lean()
+  }
+
   async getClientDataByDocument(document: string): Promise<IClient> {
     return this.clientModel.findOne({ document }).lean()
   }

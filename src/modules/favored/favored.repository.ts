@@ -9,16 +9,17 @@ export class FavoredRepository {
     private readonly favoredModel: Model<IFavored>,
   ) {}
 
-  async getAllFavoreds(page: number, perPage: number): Promise<ResponseFavoredDTO> {
+  async getAllFavoreds(page: number, perPage: number, filterQuery: object): Promise<ResponseFavoredDTO> {
     const totalFavoredsDocs = await this.favoredModel.countDocuments()
-
+    console.log(':::::::::::::', filterQuery)
     return this.favoredModel
       .find()
-      .populate('clientId')
-      .populate('accountId')
+      .populate({ path: 'clientData', select: '-createdAt -updatedAt -__v -accountsId' })
+      .populate({ path: 'accountData', select: '-createdAt -updatedAt -__v' })
       .skip((page - 1) * perPage)
       .limit(perPage)
       .lean()
+      .select('-__v')
       .then((docs) => ({
         favoreds: docs,
         page,

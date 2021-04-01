@@ -15,6 +15,10 @@ export class ClientsService {
     return this.clientRepository.createClient(clientData)
   }
 
+  async getClientsIdByQuery(query: object): Promise<{ _id: string }[]> {
+    return this.clientRepository.getClientsIdByQuery(query)
+  }
+
   async getClientDataByDocument(document: string): Promise<IClient> {
     return this.clientRepository.getClientDataByDocument(document)
   }
