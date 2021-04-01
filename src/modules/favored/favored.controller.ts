@@ -13,19 +13,8 @@ export class FavoredController {
   async getAllFavoreds(
     @Query('page', new ParseIntPipe()) page: number,
     @Query('per_page', new ParseIntPipe()) perPage: number,
-    @Query('document') document: string,
-    @Query('agency_number') agencyNumber: string,
-    @Query('account_type') accountType: string,
-    @Query('name') name: string,
   ): Promise<ResponseFavoredDTO> {
-    const queryObject = {
-      document,
-      agencyNumber,
-      accountType,
-      name,
-    }
-
-    return this.favoredService.getAllFavoreds(page, perPage, queryObject)
+    return this.favoredService.getAllFavoreds(page, perPage)
   }
 
   @Post()

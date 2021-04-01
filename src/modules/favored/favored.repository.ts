@@ -9,9 +9,9 @@ export class FavoredRepository {
     private readonly favoredModel: Model<IFavored>,
   ) {}
 
-  async getAllFavoreds(page: number, perPage: number, filterQuery: object): Promise<ResponseFavoredDTO> {
+  async getAllFavoreds(page: number, perPage: number): Promise<ResponseFavoredDTO> {
     const totalFavoredsDocs = await this.favoredModel.countDocuments()
-    console.log(':::::::::::::', filterQuery)
+
     return this.favoredModel
       .find()
       .populate({ path: 'clientData', select: '-createdAt -updatedAt -__v -accountsId' })
